@@ -1,12 +1,20 @@
 const express = require("express");
 const app = express();
 const port = 8081;
+const { users } = require("./data/users.json");
 
 app.use(express.json());
 
 app.get("/", (req, res) => {
       res.status(200).json({
             "message": "Server is up and running",
+      });
+});
+
+app.get("/users", (req, res) => {
+      res.status(200).json({
+            "success": "true",
+            "data": users,
       });
 });
 
