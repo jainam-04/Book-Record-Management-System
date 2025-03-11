@@ -1,0 +1,22 @@
+{
+  "name": "3rd-project-book-record-management-system",
+  "version": "1.0.0",
+  "description": "Book Record Management System Or Library Management System",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jainam-04/Book-Record-Management-System.git"
+  },
+  "author": "Jainam Rupani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jainam-04/Book-Record-Management-System/issues"
+  },
+  "homepage": "https://github.com/jainam-04/Book-Record-Management-System#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
