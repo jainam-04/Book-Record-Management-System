@@ -30,13 +30,18 @@ const getSingleUserById = async (req, res) => {
 }
 
 const addNewUser = async (req, res) => {
-      const { name, surname, email, subscriptionType, subscriptionDate } = req.body;
-      const newUser = await UserModel.create({
-            name, surname, email, subscriptionType, subscriptionDate
-      });
-      return res.status(200).json({
+      const { data } = req.body;
+      if (!data) {
+            return res.status(404).json({
+                  success: false,
+                  message: "No data to add the user!",
+            });
+      }
+      await UserModel.create(data);
+      const allUsers = await UserModel.find();
+      return res.status(201).json({
             success: true,
-            data: newUser,
+            data: allUsers,
       });
 }
 
@@ -110,7 +115,7 @@ const getSubscriptionDetailsById = async (req, res) => {
       const data = {
             ...user,
             isSubscriptionExpired: subscriptionExpiration < currentDate,
-            daysLeftForExpiration: subscriptionExpiration <= currentDate  ? 0 : subscriptionExpiration - currentDate,
+            daysLeftForExpiration: subscriptionExpiration <= currentDate ? 0 : subscriptionExpiration - currentDate,
             fine: returnDate < currentDate ? subscriptionExpiration <= currentDate ? 100 : 50 : 0,
       };
       return res.status(200).json({

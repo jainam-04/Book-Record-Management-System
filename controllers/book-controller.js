@@ -34,7 +34,7 @@ const getAllIssuedBooks = async (req, res) => {
       const users = await UserModel.find({
             issuedBook: { $exists: true },
       }).populate("issuedBook");
-      const issuedBooks = users.map((each) => { new IssuedBook(each) });
+      const issuedBooks = users.map((each) => new IssuedBook(each));
       if (issuedBooks.length === 0) {
             return res.status(404).json({
                   success: false,
