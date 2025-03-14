@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { getAllBooks, getSingleBookById, getAllIssuedBooks } = require("../controllers/book-controller");
+const { getAllBooks, getSingleBookById, getAllIssuedBooks, addNewBook, updateBookById } = require("../controllers/book-controller");
 const { books } = require("../data/books.json");
 const { users } = require("../data/users.json");
 
@@ -43,24 +43,7 @@ router.get("/:id", getSingleBookById);
  * Parameters: None
  */
 
-router.post("/", (req, res) => {
-      const { id, name, author, genre, price, publisher } = req.body;
-      const book = books.find((each) => each.id === id);
-      if (book) {
-            return res.status(404).json({
-                  success: false,
-                  message: "Book already exists!",
-            });
-      }
-      books.push({
-            id, name, author, genre, price, publisher
-      });
-      return res.status(201).json({
-            success: true,
-            message: "Book added successfully!",
-            data: books,
-      });
-});
+router.post("/", addNewBook);
 
 /**
  * Route: /:id
@@ -70,30 +53,6 @@ router.post("/", (req, res) => {
  * Parameters: Id
  */
 
-router.put("/:id", (req, res) => {
-      const { id } = req.params;
-      const { data } = req.body;
-      const book = books.find((each) => each.id === id);
-      if (!book) {
-            return res.status(404).json({
-                  success: false,
-                  message: "Book doesn't exists!",
-            });
-      }
-      const updateBookData = books.map((each) => {
-            if (each.id === id) {
-                  return {
-                        ...each,
-                        ...data
-                  };
-            }
-            return each;
-      });
-      return res.status(200).json({
-            success: true,
-            message: "Book Updated Successfully!",
-            data: updateBookData,
-      });
-});
+router.put("/:id", updateBookById);
 
 module.exports = router;
