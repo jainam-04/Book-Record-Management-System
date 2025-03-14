@@ -1,5 +1,4 @@
 const { UserModel, BookModel } = require("../models/index");
-const issuedBook = require("../dtos/book-dto");
 const IssuedBook = require("../dtos/book-dto");
 
 const getAllBooks = async (req, res) => {
